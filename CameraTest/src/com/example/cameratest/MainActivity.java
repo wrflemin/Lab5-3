@@ -59,11 +59,12 @@ public class MainActivity extends Activity {
 		File imageFile = new File(imagePathAndFileName);
 		imageFileUri = Uri.fromFile(imageFile);
 		
-		//TODO: Add your code here ...
-		//TODO: Add your code here ...
-		//TODO: Add your code here ...
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+		startActivityForResult(intent, CAMERA_ACTIVITY_REQUEST_CODE);
 
     }
+    private final int CAMERA_ACTIVITY_REQUEST_CODE = 12345;
     
     //This method is run after returning back from camera activity:
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -72,10 +73,9 @@ public class MainActivity extends Activity {
 			TextView tv = (TextView)findViewById(R.id.status);
 			
 			if (resultCode == RESULT_OK){
-			//TODO: Add your code here ...
-			//TODO: Add your code here ...
-			//TODO: Add your code here ...
-			//TODO: Add your code here ...
+				tv.setText("Photo completed!");
+				ImageButton ib = (ImageButton) findViewById(R.id.TakeAPhoto);
+				ib.setImageDrawable(Drawable.createFromPath(imageFileUri.getPath()));
 			}
 			else
 				if (resultCode == RESULT_CANCELED){
